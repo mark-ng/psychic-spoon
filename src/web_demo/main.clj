@@ -4,21 +4,8 @@
             [web-demo.http :as http]
             [next.jdbc :as jdbc]))
 
-(comment
-  (jdbc/execute! ds ["
-create table address (
-  id int auto_increment primary key,
-  name varchar(32),
-  email varchar(255)
-)"])
-
-  (jdbc/execute! ds ["
-insert into address(name,email)
-  values('Sean Corfield','sean@corfield.org')"]))
-
-
 (def config {:db {:dbtype "h2" :dbname "example"}
-             :port 3000})
+             :port 3001})
 
 (def system (atom nil))
 
@@ -35,6 +22,19 @@ insert into address(name,email)
       (routes/stop)
       (db/stop)))
 
+(defn create-table []
+  (jdbc/execute! (@system :ds) ["
+create table address (
+  id int auto_increment primary key,
+  name varchar(32),
+  email varchar(255)
+)"]))
+
+(defn insert-value []
+  (jdbc/execute! (@system :ds) ["
+insert into address(name,email)
+  values('Sean Corfield','sean@corfield.org')"]))
+
 (defn add-shutdown-hook [f]
   (-> (Runtime/getRuntime)
       (.addShutdownHook (Thread. f))))
@@ -44,4 +44,6 @@ insert into address(name,email)
                        (stop)
                        (println "app-stopped")))
   (start)
+  (create-table)
+  (insert-value)
   (println "app-started"))
