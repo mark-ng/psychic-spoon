@@ -3,3 +3,6 @@
 
 (defn get-all-address [ds]
   (str (jdbc/execute! ds ["select * from address"])))
+
+(defn get-address-by-id [ds id]
+  (jdbc/execute! ds ["select * from address where id = ?" id]))

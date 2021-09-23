@@ -33,7 +33,7 @@ create table address (
 (defn insert-value []
   (jdbc/execute! (@system :ds) ["
 insert into address(name,email)
-  values('Sean Corfield','sean@corfield.org')"]))
+  values('Sean Corfield','sean@corfield.org'), ('Mark', 'mark@gmail.com')"]))
 
 (defn add-shutdown-hook [f]
   (-> (Runtime/getRuntime)
@@ -44,6 +44,9 @@ insert into address(name,email)
                        (stop)
                        (println "app-stopped")))
   (start)
-  (create-table)
-  (insert-value)
+  ;; (create-table)
+  ;; (insert-value)
   (println "app-started"))
+
+(start)
+(stop)
