@@ -3,4 +3,5 @@
         compojure/compojure {:mvn/version "1.6.2"}
         ring/ring-json {:mvn/version "0.5.1"}
         com.github.seancorfield/next.jdbc {:mvn/version "1.2.709"}
-        com.h2database/h2 {:mvn/version "1.4.200"}}}
+        com.h2database/h2 {:mvn/version "1.4.200"}
+        com.github.seancorfield/honeysql {:mvn/version "2.0.783"}}}

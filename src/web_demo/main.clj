@@ -2,7 +2,8 @@
   (:require [web-demo.ds :as db]
             [web-demo.routes :as routes]
             [web-demo.http :as http]
-            [next.jdbc :as jdbc]))
+            [next.jdbc :as jdbc]
+            [honey.sql :as sql]))
 
 (def config {:db {:dbtype "h2" :dbname "example"}
              :port 3001})
@@ -53,6 +54,7 @@ insert into address(name,email)
 
 (comment
   (start)
-  (stop))
+  (stop)
+  (sql/format {:select [:*], :from [:table], :where [:= :id 1]}))
 
 (refresh)
