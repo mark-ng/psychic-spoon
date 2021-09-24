@@ -50,3 +50,5 @@ insert into address(name,email)
 
 (start)
 (stop)
+
+(jdbc/execute! (@system :ds) ["select * from address where id = 2"])

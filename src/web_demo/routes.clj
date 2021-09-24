@@ -7,14 +7,12 @@
 
 (defn create-routes [ds]
  (->> (defroutes app
-        (GET "/mark" [] (response {:a "mark"}))
+        (GET "/mark" [] (response {:a "mark 1"}))
         (GET "/" [] (logic/get-all-address ds))
         (GET "/user/:id" [id] (str "USER ID: " id))
-        ;; (GET "/address/:id" [id] (logic/get-address-by-id ds id))
+        (GET "/address/:id" [id] (logic/get-address-by-id ds id))
         (route/not-found "Page Not Found"))
       (wrap-json-response)))
-
-
 
 (defn start [{:keys [ds] :as config}]
   (assoc config :handler (create-routes ds)))
