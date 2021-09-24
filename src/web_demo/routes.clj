@@ -11,12 +11,15 @@
         (context "/address" []
           (GET "/" [] (response (logic/get-all-address ds)))
           (POST "/" [:as {:keys [body]}]
-            (logic/post-address ds body)
-            (response {:msg "Post address successfully"}))
+            (if (not body) (response {:msg "Missing Body"}) 
+                (do
+                  (logic/post-address ds body)
+                  (response {:msg "Post address successfully"})))
+            )
           (GET "/:id" [id] (response (logic/get-address-by-id ds id))))
 
         ;; Not Found APIs
-        (route/not-found "Page Not Found"))
+        (route/not-found "Page Not Found 2"))
       (wrap-json-response)
       (wrap-json-body)))
 

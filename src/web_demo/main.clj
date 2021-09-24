@@ -48,7 +48,11 @@ insert into address(name,email)
   ;; (insert-value)
   (println "app-started"))
 
-(start)
-(stop)
 
-(jdbc/execute! (@system :ds) ["select * from address where id = 2"])
+(defn refresh [] (stop) (start))
+
+(comment
+  (start)
+  (stop))
+
+(refresh)
